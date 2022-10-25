@@ -1,0 +1,18 @@
+{% extends "base.html"%}
+
+{% block content%}
+    {% if request.user.is_authenticated %}
+    <a href="{%url 'leads:lead-create'%}">Create Lead</a>
+    <a href="{%url 'logout'%}">LOGOUT</a>
+
+    <hr>
+    <h1>List Of Leads</h1>
+    {% for lead in leads %}
+    <div class="lead">
+        <a href="{%url 'leads:lead-detail' lead.pk%}">{{lead.first_name}}  {{lead.last_name}}</a>  | Age:{{lead.age}}
+    </div>
+    {% endfor %}
+    {% else %}
+    <a href="{%url 'login'%}">PleaseLogin</a>
+    {% endif %}
+    {% endblock content%}
